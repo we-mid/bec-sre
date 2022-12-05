@@ -1,19 +1,24 @@
 version: '3.8'
 
 services:
-  prometheus:
-    image: prom/prometheus
-    restart: always
-    volumes:
-      - ./prometheus:/etc/prometheus/
-      - ./prometheus_data:/prometheus
-    command:
-      - '--config.file=/etc/prometheus/prometheus.yml'
-      - '--storage.tsdb.path=/prometheus'
-      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
-      - '--web.console.templates=/usr/share/prometheus/consoles'
-    ports:
-      - 9090:9090
+  # prometheus:
+  #   image: prom/prometheus
+  #   # err="open /prometheus/queries.active: permission denied" #5976
+  #   # https://github.com/prometheus/prometheus/issues/5976#issuecomment-540457847
+  #   user: root
+  #   restart: always
+  #   volumes:
+  #     - ./prometheus:/etc/prometheus/
+  #     - ./prometheus_data:/prometheus
+  #   command:
+  #     - '--config.file=/etc/prometheus/prometheus.yml'
+  #     - '--storage.tsdb.path=/prometheus'
+  #     - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+  #     - '--web.console.templates=/usr/share/prometheus/consoles'
+  #   ports:
+  #     - 9090:9090
+  #   links:
+  #     - node-exporter
 
   node-exporter:
     image: prom/node-exporter
@@ -34,7 +39,10 @@ services:
 
   grafana:
     image: grafana/grafana
-    user: '472'
+    # user: '472'
+    # err="open /prometheus/queries.active: permission denied" #5976
+    # https://github.com/prometheus/prometheus/issues/5976#issuecomment-540457847
+    user: root
     restart: always
     environment:
       GF_INSTALL_PLUGINS: 'grafana-clock-panel,grafana-simple-json-datasource'
@@ -44,6 +52,6 @@ services:
     env_file:
       - .env.grafana
     ports:
-      - 3000:3000
-    depends_on:
-      - prometheus
+      - 4000:3000
+    # depends_on:
+    #   - prometheus

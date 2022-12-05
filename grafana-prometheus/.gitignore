@@ -1,3 +1,4 @@
 .env.grafana
 grafana_data
 prometheus_data
+prometheus-*
