@@ -11,4 +11,5 @@ cp .env.grafana.example .env.grafana
 # edit .env.grafana
 
 docker compose up -d
+# visit http://localhost:4000/
 ```
