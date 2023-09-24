@@ -1,9 +1,5 @@
 version: '3.8'
 
-networks:
-  monitoring:
-    driver: bridge
-
 volumes:
   prometheus_data: {}
   grafana_data: {}
@@ -25,8 +21,6 @@ services:
       - '^/(sys|proc|dev|host|etc|rootfs/var/lib/docker/containers|rootfs/var/lib/docker/overlay2|rootfs/run/docker/netns|rootfs/var/lib/docker/aufs)($$|/)'
     expose:
       - 9100
-    networks:
-      - monitoring
   # update to latest
   # https://github.com/prometheus/node_exporter
   # node-exporter:
@@ -58,8 +52,8 @@ services:
       - '--web.enable-lifecycle'
     expose:
       - 9090
-    networks:
-      - monitoring
+    # From inside of a Docker container, how do I connect to the localhost of the machine?
+    # https://stackoverflow.com/questions/24319662/from-inside-of-a-docker-container-how-do-i-connect-to-the-localhost-of-the-mach
     extra_hosts:
       - "host.docker.internal:host-gateway"
 
@@ -79,5 +73,5 @@ services:
       - .env.grafana
     ports:
       - 4000:3000
-    networks:
-      - monitoring
+    depends_on:
+      - prometheus

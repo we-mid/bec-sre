@@ -1,7 +1,8 @@
 # Docker Compose for Prometheus + Grafana
 
 - https://dev.to/ninadingole/docker-compose-for-prometheus-grafana-3gie
-- https://github.com/ninadingole/docker-images
+- https://github.com/ninadingole/docker-compose-stacks/blob/master/prometheus-grafana
+- https://github.com/vegasbrianc/prometheus
 - https://grafana.com/docs/grafana-cloud/quickstart/docker-compose-linux/
 
 ```sh
@@ -13,3 +14,8 @@ cp .env.grafana.example .env.grafana
 docker compose up -d
 # visit http://localhost:4000/
 ```
+
+- [ ] cadvisor
+- [ ] alertmanager
+- [x] dashboard +pm2 +docker (extra_hosts)
+- [x] dashboard +node-exporter
