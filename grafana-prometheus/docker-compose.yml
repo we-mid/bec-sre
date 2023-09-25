@@ -35,6 +35,19 @@ services:
   #   networks:
   #     - monitoring
 
+  # https://github.com/nginxinc/nginx-prometheus-exporter
+  # docker run -p 9113:9113 nginx/nginx-prometheus-exporter:0.10.0 -nginx.scrape-uri=http://<nginx>:8080/stub_status
+  nginx-exporter:
+    image: nginx/nginx-prometheus-exporter
+    restart: unless-stopped
+    command:
+      # - '-nginx.scrape-uri=https://host.docker.internal/stub_status'
+      - '-nginx.scrape-uri=https://bec.today:443/stub_status'
+    expose:
+      - 9113
+    # extra_hosts:
+    #  - "host.docker.internal:host-gateway"
+
   prometheus:
     image: prom/prometheus
     # err="open /prometheus/queries.active: permission denied" #5976

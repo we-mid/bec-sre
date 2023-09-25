@@ -28,3 +28,10 @@ scrape_configs:
     static_configs:
       - targets:
         - host.docker.internal:9323
+
+  # https://github.com/nginxinc/nginx-prometheus-exporter
+  # https://grafana.com/grafana/dashboards/14900-nginx/
+  - job_name: nginx-metrics
+    static_configs:
+      - targets:
+        - nginx-exporter:9113
