@@ -85,6 +85,8 @@ services:
     env_file:
       - .env.grafana
     ports:
-      - 4000:3000
+      # security: Docker EXPOSE a port only to Host
+      # https://stackoverflow.com/questions/22100587/docker-expose-a-port-only-to-host
+      - 127.0.0.1:4000:3000
     depends_on:
       - prometheus
