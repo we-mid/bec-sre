@@ -17,3 +17,6 @@ RUN curl -L https://github.com/rabbitmq/rabbitmq-delayed-message-exchange/releas
 RUN chown rabbitmq:rabbitmq $RABBITMQ_HOME/plugins/rabbitmq_delayed_message_exchange-3.12.0.ez
 
 RUN rabbitmq-plugins enable rabbitmq_delayed_message_exchange
+
+LABEL author="uxfritz@163.com" \
+  description="RabbitMQ w/ delayed_message_exchange plugin"
