@@ -5,6 +5,7 @@ services:
     # image: "rabbitmq-delayed:3"
     # build:
     #   context: .
+    restart: unless-stopped
     ports:
       # security: Docker EXPOSE a port only to Host
       # https://stackoverflow.com/questions/22100587/docker-expose-a-port-only-to-host

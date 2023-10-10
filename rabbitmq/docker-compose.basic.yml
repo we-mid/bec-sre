@@ -2,6 +2,7 @@ version: "3"
 services:
   rabbitmq:
     image: "rabbitmq:3-management"
+    restart: unless-stopped
     ports:
       # security: Docker EXPOSE a port only to Host
       # https://stackoverflow.com/questions/22100587/docker-expose-a-port-only-to-host
