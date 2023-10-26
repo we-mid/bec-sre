@@ -63,8 +63,14 @@ services:
       - '--web.console.libraries=/etc/prometheus/console_libraries'
       - '--web.console.templates=/etc/prometheus/consoles'
       - '--web.enable-lifecycle'
+      # Allow relative URL in web.external-url #1583 
+      # https://github.com/prometheus/prometheus/issues/1583#issuecomment-395617142
+      - '--web.external-url=http://dummy/prometheus'
+      - '--web.route-prefix=/prometheus'
     expose:
       - 9090
+    ports:
+      - 127.0.0.1:9090:9090
     # From inside of a Docker container, how do I connect to the localhost of the machine?
     # https://stackoverflow.com/questions/24319662/from-inside-of-a-docker-container-how-do-i-connect-to-the-localhost-of-the-mach
     extra_hosts:
@@ -77,8 +83,10 @@ services:
     # https://github.com/prometheus/prometheus/issues/5976#issuecomment-540457847
     user: root
     restart: unless-stopped
-    environment:
-      GF_INSTALL_PLUGINS: 'grafana-clock-panel,grafana-simple-json-datasource'
+    environment: {}
+      # Alerting problem: error message “error=“context deadline exceeded”
+      # https://community.grafana.com/t/alerting-problem-error-message-error-context-deadline-exceeded/27791/4
+      # GF_INSTALL_PLUGINS: 'grafana-clock-panel,grafana-simple-json-datasource'
     volumes:
       - grafana_data:/var/lib/grafana
       - ./grafana/provisioning/:/etc/grafana/provisioning/
