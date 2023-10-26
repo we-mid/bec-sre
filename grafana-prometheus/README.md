@@ -17,5 +17,7 @@ docker compose up -d
 
 - [ ] cadvisor
 - [ ] alertmanager
-- [x] dashboard +pm2 +docker (extra_hosts)
+- [ ] dashboard +docker
+- [x] dashboard +nginx +prometheus
+- [x] dashboard +pm2 (w/ docker extra_hosts)
 - [x] dashboard +node-exporter

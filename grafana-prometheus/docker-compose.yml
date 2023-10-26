@@ -67,8 +67,8 @@ services:
       # https://github.com/prometheus/prometheus/issues/1583#issuecomment-395617142
       - '--web.external-url=http://dummy/prometheus'
       - '--web.route-prefix=/prometheus'
-    expose:
-      - 9090
+    # expose:
+    #   - 9090
     ports:
       - 127.0.0.1:9090:9090
     # From inside of a Docker container, how do I connect to the localhost of the machine?
