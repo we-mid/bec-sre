@@ -51,22 +51,24 @@ services:
     deploy:
       mode: global
 
-  cadvisor:
-    restart: unless-stopped
-    # image: google/cadvisor
-    # image: gcr.io/cadvisor/cadvisor
-    image: gcr.lank8s.cn/cadvisor/cadvisor  # 国内
-    privileged: true
-    volumes:
-      - /:/rootfs:ro
-      - /var/run:/var/run:ro
-      - /sys:/sys:ro
-      - /var/lib/docker/:/var/lib/docker:ro
-      - /dev/disk/:/dev/disk:ro
-    expose:
-      - 8080
-    deploy:
-      mode: global
+  # cadvisor:
+  #   restart: unless-stopped
+  #   # image: google/cadvisor
+  #   # image: gcr.io/cadvisor/cadvisor
+  #   image: gcr.lank8s.cn/cadvisor/cadvisor  # 国内
+  #   privileged: true
+  #   volumes:
+  #     - /:/rootfs:ro
+  #     - /var/run:/var/run:ro
+  #     - /sys:/sys:ro
+  #     - /var/lib/docker/:/var/lib/docker:ro
+  #     - /dev/disk/:/dev/disk:ro
+  #   # expose:
+  #   #   - 8080
+  #   ports:
+  #     - 127.0.0.1:8088:8080
+  #   deploy:
+  #     mode: global
 
   prometheus:
     image: prom/prometheus
@@ -87,8 +89,6 @@ services:
       # https://github.com/prometheus/prometheus/issues/1583#issuecomment-395617142
       - '--web.external-url=http://dummy/prometheus'
       - '--web.route-prefix=/prometheus'
-    depends_on:
-      - cadvisor
     # expose:
     #   - 9090
     ports:
