@@ -22,8 +22,8 @@ services:
     # https://github.com/prometheus/node_exporter
     restart: unless-stopped
     image: quay.io/prometheus/node-exporter
-    network_mode: host
-    pid: host
+    # network_mode: host
+    # pid: host
     volumes:
       - '/:/host:ro,rslave'
     command:
@@ -52,18 +52,21 @@ services:
       mode: global
 
   cadvisor:
-    image: google/cadvisor
     restart: unless-stopped
+    # image: google/cadvisor
+    image: gcr.io/cadvisor/cadvisor
+    privileged: true
     volumes:
       - /:/rootfs:ro
-      - /var/run:/var/run:rw
+      - /var/run:/var/run:ro
       - /sys:/sys:ro
       - /var/lib/docker/:/var/lib/docker:ro
+      - /dev/disk/:/dev/disk:ro
     expose:
       - 8080
     deploy:
       mode: global
-  
+
   prometheus:
     image: prom/prometheus
     # err="open /prometheus/queries.active: permission denied" #5976
