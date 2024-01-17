@@ -1,3 +1,13 @@
+Usage:
+```sh
+# test producer
+go run producers.go
+# test consumer
+cd consumer && go run consumer.go
+# visit the admin:
+open http://localhost:4171
+```
+
 Credits:
 - nsq.io QUICK START https://nsq.io/overview/quick_start.html
 - nsq.io DOCKER https://nsq.io/deployment/docker.html
